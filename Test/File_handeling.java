@@ -11,7 +11,7 @@ ArrayList<String> SongRoots;
     
                     /* Try to make everithing from this class happen just when instancuiated, maybe */
     File_handeling(){}
-    File_handeling(ArrayList arr){
+    File_handeling(ArrayList<String> arr){
                     // Si el File se crea con " File(".") " entonces lo agarra como el directorio actual
         File fileObj = new File(System.getProperty("user.dir"));
         File dirParent = fileObj.getParentFile();
@@ -45,7 +45,7 @@ ArrayList<String> SongRoots;
 
 
 
-    private void Music_add(ArrayList arrayL, File Fobj, FilenameFilter wavF){
+    private void Music_add(ArrayList<String> arrayL, File Fobj, FilenameFilter wavF){
                     /* Basicamentene para ir añadiendo todas las canciones, suponiendo que ya estamos en la carpeta para ello */
         String[] SongList = Fobj.list(wavF);
         for (String str : SongList) {
@@ -53,7 +53,7 @@ ArrayList<String> SongRoots;
         }
     };
     
-    private void Massive_Dir_Music_add(File[] dir, FilenameFilter wavF, ArrayList arrayL){
+    private void Massive_Dir_Music_add(File[] dir, FilenameFilter wavF, ArrayList<String> arrayL){
         ArrayList<String> options = new ArrayList<>(dir.length);
         for (File str : dir) {
             if(str.isDirectory()){
@@ -71,7 +71,7 @@ ArrayList<String> SongRoots;
                     /* Usar la funcion de mas arriba para careptas individuales, y por cada carpeta sumar musica, teoricamente*/
     }
 
-    public ArrayList geArrayList(){
+    public ArrayList<String> getArrayList(){
         return SongRoots;
     }
 }
