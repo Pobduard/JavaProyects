@@ -24,11 +24,13 @@ public class Sound_functionality {
         this.SongRoots = arr;
         this.songs_file = new File[SongRoots.size()];
         this.audioStreamList = new AudioInputStream[songs_file.length];
+        this.clipList = new Clip[songs_file.length];
 
         for (int index = 0; index < SongRoots.size(); index++) {    // *Seria mas prudente quizas mandar un ArrayList de Files directamente en vez de uno de Strings para crearlos aqui
             songs_file[index] = new File(SongRoots.get(index));          // *Para crear los "File" con todas las direcciones de las canciones
             audioStreamList[index] = AudioSystem.getAudioInputStream(songs_file[index]);
             clipList[index] = AudioSystem.getClip();
+            //System.out.println("\n\n\n" + this.clipList[index]);  //! Si se crean los clips diferentes, logrado
         }
 //! Usar mejor lo de abajo en futuro, asi el sort se puede usar tambien
 //! Iniciar(SongRoots, songs_file[], audioStreamList[], clipList[])

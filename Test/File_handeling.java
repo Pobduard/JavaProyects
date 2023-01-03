@@ -49,7 +49,7 @@ ArrayList<String> SongRoots;
                     /* Basicamentene para ir añadiendo todas las canciones, suponiendo que ya estamos en la carpeta para ello */
         String[] SongList = Fobj.list(wavF);
         for (String str : SongList) {
-            arrayL.add(str);
+            arrayL.add(Fobj.getAbsolutePath() + "\\" + str);    //!No habia colocado el Path antes, ahora con el absoluto si se crean los File, teoricamente
         }
     };
     
