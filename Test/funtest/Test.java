@@ -1,3 +1,5 @@
+package funtest;
+
 import java.util.Random;
 public class Test {
     public String random_name(){

@@ -1,3 +1,5 @@
+package funtest;
+
 public class func {
     String name;
     String last_name;
