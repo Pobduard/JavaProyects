@@ -30,6 +30,7 @@ public class Sound_functionality {
             songs_file[index] = new File(SongRoots.get(index));          // *Para crear los "File" con todas las direcciones de las canciones
             audioStreamList[index] = AudioSystem.getAudioInputStream(songs_file[index]);
             clipList[index] = AudioSystem.getClip();
+            clipList[index].open(audioStreamList[index]);
             //System.out.println("\n\n\n" + this.clipList[index]);  //! Si se crean los clips diferentes, logrado
         }
 //! Usar mejor lo de abajo en futuro, asi el sort se puede usar tambien

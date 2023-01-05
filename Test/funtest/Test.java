@@ -1,6 +1,12 @@
 package funtest;
 
 import java.util.Random;
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 public class Test {
     public String random_name(){
         Random random = new Random();
@@ -64,8 +70,8 @@ public class Test {
         arr = auxiliar;
     }
 
-    public static void main(String[] args) {
-    Test testObj = new Test();
+    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    /* Test testObj = new Test();
     Random random = new Random();
     String name = testObj.random_name();
     String last_name = testObj.random_last_name();
@@ -90,6 +96,32 @@ public class Test {
     System.out.println(".\n.\n[Intentar llamar a ver si 13.]\n.\n.");
 
     testObj.enlarge_arr_test(array);
-    System.out.println("\n\nEl Tamaño del Array es: " + array.length);
+    System.out.println("\n\nEl Tamaño del Array es: " + array.length); */
+
+
+    File phil = new File("C:\\Users\\JAIBER A\\Desktop\\Pob\\Code Related\\JavaProjects\\Test\\funtest");
+    File[] files = phil.listFiles();
+    ArrayList<String> paths = new ArrayList<String>(0);
+    ArrayList<File> songsfiles = new ArrayList<File>(0);
+    for (int i = 0; i < files.length; i++) {
+        paths.add(files[i].getAbsolutePath());
+        System.out.println(paths.get(i));
+        if(paths.get(i).endsWith("wav")){
+            songsfiles.add(new File(paths.get(i)));
+        }
+    }
+    for (File file : songsfiles) {
+        System.out.println(file.getName());
+        System.out.println("*");
+    }
+
+    AudioInputStream aud = AudioSystem.getAudioInputStream(songsfiles.get(0));
+    Clip clip = AudioSystem.getClip();
+    clip.open(aud);
+    System.out.println(clip.getFrameLength());
+
+    clip.start();
+    Scanner scan = new Scanner(System.in);
+    scan.nextInt();
 }
 }
