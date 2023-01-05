@@ -29,23 +29,28 @@ public class Main {
 
         Integer quitDesicion = 0;
 
+        System.out.println("Enter the position (number) of the Song ya wanna play");
+        Integer posicion = 0;
+        try {
+            posicion = scan.nextInt();      
+            scan.nextLine();
+        } catch (Exception InputMismatchException) {
+            System.out.println("Bruh i said put a number");;
+        }
+        play.start(play.clipList, posicion, play.audioStreamList);
+        
+// ! Aqui el de arriba no agarra jamas porqeu se para de una abajo, la solucion mas simple seria meterlo de una y listo, osea sin lo de arriba que es
+// !Default realmente, y dehjarlo solo dentro del loop de abajo, sirve para juego y eso ya con acivar las funciones a traves de botones y eso
+// !Pero evidentemente es ineficiente usarlo asi porque aja, tarda en cagar todod esos archivos, seria mejor irlo creando y abriendo de a 1
+// !Pero consegui lo que queria, tons nice.
+// !Suficiete de este proyecto de momento
         do {
-            System.out.println("Enter the position of the Song ya wanna play");
-            Integer posicion = 0;
-                    try {
-                        posicion = scan.nextInt();      
-                        scan.nextLine();
-                    } catch (Exception InputMismatchException) {
-                        continue;
-                    }
-                    play.start(play.clipList, posicion);
-
             System.out.println("Wanna change the song? if so give a number");
                 try {
+                    play.stop(play.clipList, posicion);
                     posicion = scan.nextInt();      
                     scan.nextLine();
-                    play.stop(play.clipList, posicion);
-                    play.start(play.clipList, posicion);
+                    play.start(play.clipList, posicion, play.audioStreamList);
                 } catch (Exception InputMismatchException) {
                     System.out.println("So ya dont wanna, respect");
                 }

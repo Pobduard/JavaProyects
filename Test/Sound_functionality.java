@@ -30,7 +30,6 @@ public class Sound_functionality {
             songs_file[index] = new File(SongRoots.get(index));          // *Para crear los "File" con todas las direcciones de las canciones
             audioStreamList[index] = AudioSystem.getAudioInputStream(songs_file[index]);
             clipList[index] = AudioSystem.getClip();
-            clipList[index].open(audioStreamList[index]);
             //System.out.println("\n\n\n" + this.clipList[index]);  //! Si se crean los clips diferentes, logrado
         }
 //! Usar mejor lo de abajo en futuro, asi el sort se puede usar tambien
@@ -54,17 +53,21 @@ public class Sound_functionality {
         arr.sort(Comparator.reverseOrder());
     }
 
-    public void start(Clip[] this_clip, Integer posicion){
+    public void start(Clip[] this_clip, Integer posicion, AudioInputStream[] this_audioStream) throws LineUnavailableException, IOException{
+        this_clip[posicion].open(this_audioStream[posicion]);   // !Faltaba Abririlo oficialmente con esto, luego de rearlo, y ahi si se puede empezar la cancion
         this_clip[posicion].start();
     }
 
-    public void startAt(Clip[] this_clip, Integer posicion, Long at){
+    public void startAt(Clip[] this_clip, Integer posicion, Long at){ //! muy probablemente este bugeado por el open y close, no lo eh probado, pa otra oportunidad
         this_clip[posicion].setMicrosecondPosition(at);
         this_clip[posicion].start();
     }
 
     public void stop(Clip[] this_clip, Integer posicion){
-        this_clip[posicion].stop();
+        System.out.println(this_clip[posicion].isRunning());
+        this_clip[posicion].stop(); // !Faltaba cerrarlo con esto, luego de abrirlo, y ahi si cerrar cerrar el archivo
+        this_clip[posicion].close();
+        System.out.println(this_clip[posicion].isRunning());
     }
 
     public void jumpTo(Clip[] this_clip, Integer posicion, Long this_jumpto){
